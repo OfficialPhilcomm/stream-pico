@@ -25,33 +25,33 @@ key5.inactive()
 streaming = False
 
 while True:
-    if not streaming and key0.is_pressed():
-        streaming = True
+  if not streaming and key0.is_pressed():
+    streaming = True
 
-        key0.color(color_green)
-        key0.active()
+    key0.color(color_green)
+    key0.active()
 
-        key3.inactive()
+    key3.inactive()
 
-        key0.handle_press(keyboard)
-    elif streaming and key3.is_pressed():
-        key0.color(color_red)
-        key0.inactive()
+    key0.handle_press(keyboard)
+  elif streaming and key3.is_pressed():
+    key0.color(color_red)
+    key0.inactive()
 
-        key3.off()
+    key3.off()
 
-        streaming = False
+    streaming = False
 
-        key3.handle_press(keyboard)
+    key3.handle_press(keyboard)
 
-    if key4.is_pressed():
-        key5.inactive()
+  if key4.is_pressed():
+    key5.inactive()
 
-        key4.active()
-        key4.handle_press(keyboard)
-    elif key5.is_pressed():
-        key4.inactive()
+    key4.active()
+    key4.handle_press(keyboard)
+  elif key5.is_pressed():
+    key4.inactive()
 
-        key5.active()
-        key5.handle_press(keyboard)
-    time.sleep(0.01)
+    key5.active()
+    key5.handle_press(keyboard)
+  time.sleep(0.01)
