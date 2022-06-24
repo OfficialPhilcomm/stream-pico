@@ -2,13 +2,11 @@ import time
 from adafruit_hid.keycode import Keycode
 
 class KeypadKey:
-    def __init__(self, x, y, keys, keypad, color):
-        self.x = x
-        self.y = y
-        self.keys = keys
+    def __init__(self, keypad, keys, color):
         self.keypad = keypad
-        self.keypad.color = color
-        self.inactive()
+        self.keys = keys
+        self.off()
+        self.color(color)
     
     def press(self, keyboard):
         keyboard.send(*self.keys)
@@ -27,9 +25,11 @@ class KeypadKey:
 
     def inactive(self):
         self.brightness(0.1)
-
+        
+    def off(self):
+        self.brightness(0)
+        
     def handle_press(self, keyboard):
-        self.active()
         self.press(keyboard)
         while self.is_pressed():
             time.sleep(0.01)
