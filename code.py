@@ -5,82 +5,44 @@ from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.keycode import Keycode
 from random import randint
 from keypadkey import KeypadKey
+from recording_bar import RecordingBar
+from scene import Scene
+import shared
 
 keypad = RGBKeypad()
 keyboard = Keyboard(usb_hid.devices)
+shared.set_keypad(keypad)
+shared.set_keyboard(keyboard)
 
-color_red = (252, 36, 3)
-color_green = (3, 252, 15)
+recording_bar = RecordingBar(0)
 
-key0 = KeypadKey(keypad.keys[0], (Keycode.LEFT_CONTROL, Keycode.KEYPAD_ONE), color_red)
-key0.inactive()
-key1 = KeypadKey(keypad.keys[1], None, color_green)
-key2 = KeypadKey(keypad.keys[2], None, color_green)
+scene_intro = Scene(0, (247, 198, 2))
+scene_intro.add_action(0, (Keycode.LEFT_CONTROL, Keycode.KEYPAD_SEVEN), (240, 5, 228)),
 
-key3 = KeypadKey(keypad.keys[3], (Keycode.LEFT_CONTROL, Keycode.KEYPAD_TWO), color_red)
+scene_secondary = Scene(1, (2, 149, 247))
 
-key4 = KeypadKey(keypad.keys[4], (Keycode.LEFT_CONTROL, Keycode.KEYPAD_THREE), (247, 198, 2))
-key4.inactive()
-key5 = KeypadKey(keypad.keys[5], (Keycode.LEFT_CONTROL, Keycode.KEYPAD_FOUR), (2, 149, 247))
-key5.inactive()
+scenes = [None] * 4
 
-key8 = KeypadKey(keypad.keys[8], (Keycode.LEFT_CONTROL, Keycode.KEYPAD_SEVEN), (240, 5, 228))
+scenes[0] = scene_intro
+scenes[1] = scene_secondary
 
-active_scene = 0
+active_scene = None
 
 streaming = False
 
 while True:
-  if not streaming and key0.is_pressed():
-    streaming = True
+  for i in range(4):
+    if scenes[i] and scenes[i].is_pressed():
+      for scene in scenes:
+        if scene:
+          scene.inactive()
+      scenes[i].active()
+      active_scene = scenes[i]
 
-    key0.color(color_green)
-    key0.active()
+  for i in range(8):
+    if keypad.keys[8 + i].is_pressed():
+      active_scene.trigger_action(i)
 
-    time.sleep(1)
-    key1.active()
-    time.sleep(1)
-    key2.active()
-    time.sleep(1)
+  recording_bar.check_for_pressed()
 
-    key3.active()
-
-    key0.handle_press(keyboard)
-  elif streaming and key3.is_pressed():
-    key0.color(color_red)
-    key0.inactive()
-
-    key1.off()
-    key2.off()
-    key3.off()
-
-    streaming = False
-
-    key3.handle_press(keyboard)
-
-  if key4.is_pressed():
-    key5.inactive()
-    key8.active()
-
-    key4.press(keyboard)
-    key4.blink_for(2)
-    key4.active()
-
-    active_scene = 1
-  elif key5.is_pressed():
-    key4.inactive()
-    key8.off()
-
-    key5.press(keyboard)
-    key5.blink_for(2)
-    key5.active()
-
-    active_scene = 2
-  elif active_scene == 1 and key8.is_pressed():
-    key8.press(keyboard)
-    key8.inactive()
-    time.sleep(0.5)
-    key8.blink_for(2)
-    key8.active()
-
-  time.sleep(0.01)
+  time.sleep(0.1)
