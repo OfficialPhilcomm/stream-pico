@@ -15,6 +15,9 @@ color_green = (3, 252, 15)
 
 key0 = KeypadKey(keypad.keys[0], (Keycode.LEFT_CONTROL, Keycode.KEYPAD_ONE), color_red)
 key0.inactive()
+key1 = KeypadKey(keypad.keys[1], None, color_green)
+key2 = KeypadKey(keypad.keys[2], None, color_green)
+
 key3 = KeypadKey(keypad.keys[3], (Keycode.LEFT_CONTROL, Keycode.KEYPAD_TWO), color_red)
 
 key4 = KeypadKey(keypad.keys[4], (Keycode.LEFT_CONTROL, Keycode.KEYPAD_THREE), (247, 198, 2))
@@ -31,13 +34,21 @@ while True:
     key0.color(color_green)
     key0.active()
 
-    key3.inactive()
+    time.sleep(1)
+    key1.active()
+    time.sleep(1)
+    key2.active()
+    time.sleep(1)
+
+    key3.active()
 
     key0.handle_press(keyboard)
   elif streaming and key3.is_pressed():
     key0.color(color_red)
     key0.inactive()
 
+    key1.off()
+    key2.off()
     key3.off()
 
     streaming = False
