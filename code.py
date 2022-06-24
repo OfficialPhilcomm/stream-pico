@@ -10,7 +10,6 @@ keypad = RGBKeypad()
 keyboard = Keyboard(usb_hid.devices)
 
 color_red = (252, 36, 3)
-# color_green = (3, 252, 136)
 color_green = (3, 252, 15)
 
 key0 = KeypadKey(keypad.keys[0], (Keycode.LEFT_CONTROL, Keycode.KEYPAD_ONE), color_red)
