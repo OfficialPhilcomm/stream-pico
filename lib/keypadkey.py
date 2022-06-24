@@ -33,3 +33,10 @@ class KeypadKey:
     self.press(keyboard)
     while self.is_pressed():
       time.sleep(0.01)
+
+  def blink_for(self, ticks):
+    for x in range(ticks):
+      self.active()
+      time.sleep(0.5)
+      self.inactive()
+      time.sleep(0.5)

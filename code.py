@@ -57,11 +57,14 @@ while True:
   if key4.is_pressed():
     key5.inactive()
 
+    key4.press(keyboard)
+    key4.blink_for(2)
     key4.active()
-    key4.handle_press(keyboard)
   elif key5.is_pressed():
     key4.inactive()
 
+    key5.press(keyboard)
+    key5.blink_for(2)
     key5.active()
-    key5.handle_press(keyboard)
+
   time.sleep(0.01)
