@@ -7,16 +7,16 @@ class KeypadKey:
         self.keys = keys
         self.off()
         self.color(color)
-    
+
     def press(self, keyboard):
         keyboard.send(*self.keys)
-    
+
     def color(self, color):
         self.keypad.color = color
-    
+
     def brightness(self, brightness):
         self.keypad.brightness = brightness
-    
+
     def is_pressed(self):
         return self.keypad.is_pressed()
 
@@ -25,10 +25,10 @@ class KeypadKey:
 
     def inactive(self):
         self.brightness(0.1)
-        
+
     def off(self):
         self.brightness(0)
-        
+
     def handle_press(self, keyboard):
         self.press(keyboard)
         while self.is_pressed():

@@ -1,7 +1,7 @@
 MICROPYTHON = True
 try:
     import machine
-    
+
     PIN_SDA = 4
     PIN_SCL = 5
     PIN_CS = 17
@@ -16,13 +16,13 @@ try:
     import board
     import busio
     import digitalio
-    
+
     PIN_SDA = board.GP4
     PIN_SCL = board.GP5
     PIN_CS = board.GP17
     PIN_SCK = board.GP18
     PIN_MOSI = board.GP19
-        
+
 except ImportError:
     CIRCUITPYTHON = False
 
@@ -30,11 +30,11 @@ if not MICROPYTHON and not CIRCUITPYTHON:
     raise Exception("Could not find MicroPython or CircuitPython.")
 
 class RGBKeypad():
-    
+
     KEYPAD_ADDRESS = 32
 
     class MPDevice():
-        
+
         def __init__(self):
             """
             Internal class used to communicate with the keypad device when
@@ -42,27 +42,27 @@ class RGBKeypad():
             """
             # setup i2c
             self._i2c = machine.I2C(
-                0, 
-                scl=machine.Pin(PIN_SCL), 
-                sda=machine.Pin(PIN_SDA), 
+                0,
+                scl=machine.Pin(PIN_SCL),
+                sda=machine.Pin(PIN_SDA),
                 freq=400000
                 )
 
             # setup spi
             self._spi = machine.SPI(
-                0, 
-                baudrate=4*1024*1024, 
-                sck=machine.Pin(PIN_SCK), 
+                0,
+                baudrate=4*1024*1024,
+                sck=machine.Pin(PIN_SCK),
                 mosi=machine.Pin(PIN_MOSI)
                 )
-            
+
             # setup cs
             self._cs = machine.Pin(
-                PIN_CS, 
+                PIN_CS,
                 machine.Pin.OUT
                 )
             self._cs.high()
-        
+
         def read_keys(self):
             self._i2c.writeto(RGBKeypad.KEYPAD_ADDRESS, bytearray(1), True)
             data = self._i2c.readfrom(RGBKeypad.KEYPAD_ADDRESS, 2, False)
@@ -72,9 +72,9 @@ class RGBKeypad():
             self._cs.low()
             self._spi.write(led_data)
             self._cs.high()
-            
+
     class CPDevice():
-        
+
 
 
         def __init__(self):
@@ -82,7 +82,7 @@ class RGBKeypad():
             Internal class used to communicate with the keypad device when
             using CircuitPython.
             """
-            
+
             PIN_SDA = board.GP4
             PIN_SCL = board.GP5
             PIN_CS = board.GP17
@@ -90,7 +90,7 @@ class RGBKeypad():
             PIN_MOSI = board.GP19
             # setup i2c
             self._i2c = busio.I2C(
-                scl=PIN_SCL, 
+                scl=PIN_SCL,
                 sda=PIN_SDA,
                 frequency=400000
                 )
@@ -98,17 +98,17 @@ class RGBKeypad():
 
             # setup spi
             self._spi = busio.SPI(
-                clock=PIN_SCK, 
+                clock=PIN_SCK,
                 MOSI=PIN_MOSI
                 )
             self._spi.try_lock()
             self._spi.configure(baudrate=4*1024*1024)
-            
+
             # setup cs
             self._cs = digitalio.DigitalInOut(PIN_CS)
             self._cs.direction = digitalio.Direction.OUTPUT
             self._cs.value = True
-        
+
         def read_keys(self):
             self._i2c.writeto(RGBKeypad.KEYPAD_ADDRESS, bytearray(1))
             data = bytearray(2)
@@ -124,7 +124,7 @@ class RGBKeypad():
 
         def __init__(self, keypad, x, y, red, green, blue, brightness):
             """
-            Represents a single key of the RGB Keypad. 
+            Represents a single key of the RGB Keypad.
 
             Returned when using RGBKeypad[x,y] or RGBKeypad.get_key(x,y)::
 
@@ -139,7 +139,7 @@ class RGBKeypad():
             self._green = green
             self._blue = blue
             self._brightness = brightness
-            
+
         @property
         def x(self):
             """
@@ -157,7 +157,7 @@ class RGBKeypad():
         @property
         def brightness(self):
             """
-            Sets or returns the brightness of the key. 
+            Sets or returns the brightness of the key.
 
             A value between 0 and 1 where 0 is off and 1 is full brightness.
             """
@@ -177,7 +177,7 @@ class RGBKeypad():
             A value between 0 and 255.
             """
             return self._red
-        
+
         @red.setter
         def red(self, value):
             value = max(min(255, value), 0)
@@ -192,7 +192,7 @@ class RGBKeypad():
             A value between 0 and 255.
             """
             return self._green
-        
+
         @green.setter
         def green(self, value):
             value = max(min(255, value), 0)
@@ -207,7 +207,7 @@ class RGBKeypad():
             A value between 0 and 255.
             """
             return self._blue
-        
+
         @blue.setter
         def blue(self, value):
             value = max(min(255, value), 0)
@@ -246,7 +246,7 @@ class RGBKeypad():
 
         def clear(self):
             """
-            Clears the key color. 
+            Clears the key color.
 
             Clear is the same as setting the color to black (0, 0, 0).
             """
@@ -270,7 +270,7 @@ class RGBKeypad():
             key = rgbkeypad[0, 0]
 
         :param tuple color:
-            The initial color for all the keys. 
+            The initial color for all the keys.
 
             A tuple of (red, green, blue) values between 0 and 255.
 
@@ -308,16 +308,16 @@ class RGBKeypad():
                 self._keys.append(
                     RGBKeypad.RGBKey(self, x, y, color[0], color[1], color[2], brightness)
                     )
-        
+
         self.update()
-        
+
         self.auto_update = auto_update
         self._color = color
         self._brightness = brightness
 
     def clear(self):
         """
-        Clears all the keys color. 
+        Clears all the keys color.
 
         Clear is the same as setting the color to black (0, 0, 0).
         """
@@ -329,11 +329,11 @@ class RGBKeypad():
         Sets the color of all the keys as a tuple of (red, green, blue) values
         between 0 and 255.
 
-        Note - color will return the "default" or "initial" color of the keys. 
+        Note - color will return the "default" or "initial" color of the keys.
         If an individual key's color has been change this wont be represented.
         """
         return self._color
-    
+
     @color.setter
     def color(self, value):
         auto_update_value = self.auto_update
@@ -344,15 +344,15 @@ class RGBKeypad():
         self.update()
 
         self.auto_update = auto_update_value
-    
+
     @property
     def brightness(self):
         """
-        Sets the brightness of all the keys as a value between 0 and 1 where 
+        Sets the brightness of all the keys as a value between 0 and 1 where
         0 is off and 1 is full brightness.
 
-        Note - brightness will return the "default" or "initial" brightness 
-        of the keys. If an individual key's brightness has been change this 
+        Note - brightness will return the "default" or "initial" brightness
+        of the keys. If an individual key's brightness has been change this
         wont be represented.
         """
         return self._brightness
@@ -367,14 +367,14 @@ class RGBKeypad():
         self.update()
 
         self.auto_update = auto_update_value
-    
+
     @property
     def keys(self):
         """
         Returns a list of all the keys as RGBKey objects.
         """
         return self._keys
-    
+
     def get_keys_pressed(self):
         """
         Returns a list of 16 booleans represent the current pressed
@@ -382,7 +382,7 @@ class RGBKeypad():
         """
         data = self._device.read_keys()
         button_data = int.from_bytes(data, "little")
-        
+
         # button states
         button_states = []
         for button in range(16):

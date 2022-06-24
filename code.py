@@ -30,18 +30,18 @@ while True:
 
         key0.color(color_green)
         key0.active()
-        
+
         key3.inactive()
-        
+
         key0.handle_press(keyboard)
     elif streaming and key3.is_pressed():
         key0.color(color_red)
         key0.inactive()
 
         key3.off()
-        
+
         streaming = False
-        
+
         key3.handle_press(keyboard)
 
     if key4.is_pressed():
