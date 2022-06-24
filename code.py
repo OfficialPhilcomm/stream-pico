@@ -32,7 +32,7 @@ streaming = False
 
 while True:
   for i in range(4):
-    if scenes[i] and scenes[i].is_pressed():
+    if scenes[i] and scenes[i] != active_scene and scenes[i].is_pressed():
       for scene in scenes:
         if scene:
           scene.inactive()
