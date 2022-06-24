@@ -2,11 +2,11 @@ import shared
 from keypadkey import KeypadKey
 
 class Scene:
-  def __init__(self, id, color):
+  def __init__(self, id, keys, color):
     self.id = id
     self.actions = [None] * 8
 
-    self.scene_button = KeypadKey(shared.keypad.keys[4 + id], None, color)
+    self.scene_button = KeypadKey(shared.keypad.keys[4 + id], keys, color)
     self.scene_button.inactive()
 
   def add_action(self, id, keys, color):
@@ -21,6 +21,7 @@ class Scene:
     for action in self.actions:
       if action:
         action.inactive()
+    self.scene_button.press(shared.keyboard)
     self.scene_button.blink_for(2)
     self.scene_button.active()
 
@@ -32,4 +33,5 @@ class Scene:
 
   def trigger_action(self, id):
     if self.actions[id]:
+      self.actions[id].press(shared.keyboard)
       self.actions[id].blink_for(2)

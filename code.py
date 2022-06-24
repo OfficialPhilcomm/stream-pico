@@ -16,10 +16,10 @@ shared.set_keyboard(keyboard)
 
 recording_bar = RecordingBar(0)
 
-scene_intro = Scene(0, (247, 198, 2))
+scene_intro = Scene(0, (Keycode.LEFT_CONTROL, Keycode.KEYPAD_THREE), (247, 198, 2))
 scene_intro.add_action(0, (Keycode.LEFT_CONTROL, Keycode.KEYPAD_SEVEN), (240, 5, 228)),
 
-scene_secondary = Scene(1, (2, 149, 247))
+scene_secondary = Scene(1, (Keycode.LEFT_CONTROL, Keycode.KEYPAD_FOUR), (2, 149, 247))
 
 scenes = [None] * 4
 
