@@ -17,6 +17,8 @@ class IntroScene(Scene):
     self.action_toggle_logo_and_countdown = KeypadKey(shared.keypad.keys[11], None, (64, 255, 0))
     self.logo_and_countdown_visible = True
 
+    self.action_play_video = KeypadKey(shared.keypad.keys[15], (Keycode.ALT, Keycode.KEYPAD_ONE), (2, 149, 247))
+
   def trigger_action(self, id):
     if id == 0:
       self.action_reset_music.press(shared.keyboard)
@@ -41,6 +43,9 @@ class IntroScene(Scene):
         self.action_toggle_logo_and_countdown.inactive()
         time.sleep(0.5)
         self.action_toggle_logo_and_countdown.active()
+    elif id == 7:
+      self.action_play_video.press(shared.keyboard)
+      self.action_play_video.blink_for(1)
 
   def active(self):
     self.logo_and_countdown_visible = True
@@ -48,6 +53,7 @@ class IntroScene(Scene):
     self.action_reset_music.inactive()
     self.action_reset_countdown.inactive()
     self.action_toggle_logo_and_countdown.active()
+    self.action_play_video.inactive()
 
     Scene.active(self)
 
@@ -55,5 +61,6 @@ class IntroScene(Scene):
     self.action_reset_music.off()
     self.action_reset_countdown.off()
     self.action_toggle_logo_and_countdown.off()
+    self.action_play_video.off()
 
     Scene.inactive(self)
