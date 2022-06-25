@@ -9,7 +9,6 @@ from scene import Scene
 from button import Button
 import scene_builder
 
-
 keypad = RGBKeypad()
 keyboard = Keyboard(usb_hid.devices)
 shared.set_keypad(keypad)
