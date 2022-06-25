@@ -15,6 +15,7 @@ class Button:
     self.button.inactive()
 
   def active(self):
+    self.button.set_color()
     self.button.inactive()
 
   def inactive(self):

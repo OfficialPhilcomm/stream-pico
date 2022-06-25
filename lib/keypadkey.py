@@ -6,6 +6,9 @@ class KeypadKey:
     self.off()
     self.color(color)
 
+  def set_color(self):
+    self.key.color = self.color
+
   def color(self, color):
     self.key.color = color
 
