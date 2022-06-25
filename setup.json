@@ -23,6 +23,12 @@
           "color": [7, 247, 27],
           "keys_on": ["LEFT_CONTROL", "KEYPAD_SEVEN"],
           "keys_off": ["LEFT_CONTROL", "KEYPAD_EIGHT"]
+        },
+        {
+          "type": "button",
+          "id": 7,
+          "color": [247, 119, 7],
+          "keys": ["LEFT_CONTROL", "KEYPAD_NINE"]
         }
       ]
     },
