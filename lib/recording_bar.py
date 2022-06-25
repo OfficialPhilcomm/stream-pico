@@ -10,11 +10,11 @@ class RecordingBar:
   def __init__(self, row):
     self.row = row
 
-    self.key_start = KeypadKey(shared.keypad.keys[(row * 4)], (Keycode.LEFT_CONTROL, Keycode.KEYPAD_ONE), color_red)
+    self.key_start = KeypadKey((row * 4), color_red)
     self.key_start.inactive()
-    self.key_countdown_two = KeypadKey(shared.keypad.keys[(row * 4) + 1], None, color_green)
-    self.key_countdown_one = KeypadKey(shared.keypad.keys[(row * 4) + 2], None, color_green)
-    self.key_recording = KeypadKey(shared.keypad.keys[(row * 4) + 3], (Keycode.LEFT_CONTROL, Keycode.KEYPAD_TWO), color_red)
+    self.key_countdown_two = KeypadKey((row * 4) + 1, color_green)
+    self.key_countdown_one = KeypadKey((row * 4) + 2, color_green)
+    self.key_recording = KeypadKey((row * 4) + 3, color_red)
 
     self.streaming = False
 
@@ -37,7 +37,7 @@ class RecordingBar:
       self.key_countdown_two.inactive()
       self.key_countdown_one.inactive()
 
-      self.key_start.handle_press(shared.keyboard)
+      shared.keyboard.send(Keycode.LEFT_CONTROL, Keycode.KEYPAD_ONE)
     elif self.streaming and self.key_recording.is_pressed():
       self.key_start.color(color_red)
       self.key_start.inactive()
@@ -48,4 +48,4 @@ class RecordingBar:
 
       self.streaming = False
 
-      self.key_recording.handle_press(shared.keyboard)
+      shared.keyboard.send(Keycode.LEFT_CONTROL, Keycode.KEYPAD_TWO)

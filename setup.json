@@ -1,0 +1,28 @@
+{
+  "scenes": [
+    {
+      "id": 0,
+      "color": [247, 198, 2],
+      "keys": ["LEFT_CONTROL", "KEYPAD_THREE"],
+      "actions": [
+        {
+          "type": "button",
+          "id": 0,
+          "color": [240, 5, 228],
+          "keys": ["LEFT_CONTROL", "KEYPAD_FIVE"]
+        },
+        {
+          "type": "button",
+          "id": 1,
+          "color": [255, 234, 0],
+          "keys": ["LEFT_CONTROL", "KEYPAD_SIX"]
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "color": [2, 149, 247],
+      "keys": ["LEFT_CONTROL", "KEYPAD_FOUR"]
+    }
+  ]
+}
