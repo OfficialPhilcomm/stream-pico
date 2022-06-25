@@ -16,6 +16,13 @@
           "id": 1,
           "color": [255, 234, 0],
           "keys": ["LEFT_CONTROL", "KEYPAD_SIX"]
+        },
+        {
+          "type": "toggle",
+          "id": 4,
+          "color": [7, 247, 27],
+          "keys_on": ["LEFT_CONTROL", "KEYPAD_SEVEN"],
+          "keys_off": ["LEFT_CONTROL", "KEYPAD_EIGHT"]
         }
       ]
     },
