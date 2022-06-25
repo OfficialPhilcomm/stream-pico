@@ -15,12 +15,18 @@ def build(scenes_array):
         action = None
         if action_obj["type"] == "button":
           action = Button(action_obj["id"], resolve_color(action_obj["color"]), list(map(resolve_key, action_obj["keys"])))
+
         elif action_obj["type"] == "toggle":
+          remember_state = False
+          if "remember_state" in action_obj.keys():
+            remember_state = action_obj["remember_state"]
+
           action = Toggle(
             action_obj["id"],
             resolve_color(action_obj["color"]),
             list(map(resolve_key, action_obj["keys_on"])),
-            list(map(resolve_key, action_obj["keys_off"]))
+            list(map(resolve_key, action_obj["keys_off"])),
+            remember_state
           )
 
         if action:

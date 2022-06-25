@@ -3,11 +3,12 @@ from keypadkey import KeypadKey
 import shared
 
 class Toggle:
-  def __init__(self, id, color, keys_on, keys_off):
+  def __init__(self, id, color, keys_on, keys_off, remember_state):
     self.toggle = KeypadKey(8 + id, color)
     self.color = color
     self.keys_on = keys_on
     self.keys_off = keys_off
+    self.remember_state = remember_state
     self.is_on = True
 
   def trigger(self):
@@ -24,8 +25,13 @@ class Toggle:
 
   def active(self):
     self.toggle.set_color()
-    self.toggle.active()
-    self.is_on = True
+
+    if not self.remember_state:
+      self.is_on = True
+    if self.is_on:
+      self.toggle.active()
+    else:
+      self.toggle.inactive()
 
   def inactive(self):
     self.toggle.off()

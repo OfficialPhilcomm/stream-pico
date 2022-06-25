@@ -22,7 +22,8 @@
           "id": 4,
           "color": [7, 247, 27],
           "keys_on": ["LEFT_CONTROL", "KEYPAD_SEVEN"],
-          "keys_off": ["LEFT_CONTROL", "KEYPAD_EIGHT"]
+          "keys_off": ["LEFT_CONTROL", "KEYPAD_EIGHT"],
+          "remember_state": true
         },
         {
           "type": "button",
