@@ -2,6 +2,7 @@ import json
 from adafruit_hid.keycode import Keycode
 from scene import Scene
 from button import Button
+from toggle import Toggle
 
 def build(scenes_array):
   obj = json.loads(open("setup.json").read())
@@ -14,6 +15,13 @@ def build(scenes_array):
         action = None
         if action_obj["type"] == "button":
           action = Button(action_obj["id"], resolve_color(action_obj["color"]), list(map(resolve_key, action_obj["keys"])))
+        elif action_obj["type"] == "toggle":
+          action = Toggle(
+            action_obj["id"],
+            resolve_color(action_obj["color"]),
+            list(map(resolve_key, action_obj["keys_on"])),
+            list(map(resolve_key, action_obj["keys_off"]))
+          )
 
         if action:
           scene.add_action(action_obj["id"], action)
