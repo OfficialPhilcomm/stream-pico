@@ -26,8 +26,6 @@ scenes[1] = scene_zoom
 
 active_scene = None
 
-streaming = False
-
 while True:
   for i in range(4):
     if scenes[i] and scenes[i] != active_scene and scenes[i].is_pressed():
