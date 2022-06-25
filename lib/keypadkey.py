@@ -4,12 +4,14 @@ class KeypadKey:
   def __init__(self, id, color):
     self.key = shared.keypad.keys[id]
     self.off()
+    self.color_buffer = color
     self.color(color)
 
   def set_color(self):
-    self.key.color = self.color
+    self.color(self.color_buffer)
 
   def color(self, color):
+    self.color_buffer = color
     self.key.color = color
 
   def brightness(self, brightness):
