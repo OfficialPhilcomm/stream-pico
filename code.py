@@ -6,7 +6,8 @@ from adafruit_hid.keycode import Keycode
 from random import randint
 from keypadkey import KeypadKey
 from recording_bar import RecordingBar
-from scene import Scene
+from intro_scene import IntroScene
+from zoom_scene import ZoomScene
 import shared
 
 keypad = RGBKeypad()
@@ -16,15 +17,12 @@ shared.set_keyboard(keyboard)
 
 recording_bar = RecordingBar(0)
 
-scene_intro = Scene(0, (Keycode.LEFT_CONTROL, Keycode.KEYPAD_THREE), (247, 198, 2))
-scene_intro.add_action(0, (Keycode.LEFT_CONTROL, Keycode.KEYPAD_SEVEN), (240, 5, 228)),
-
-scene_secondary = Scene(1, (Keycode.LEFT_CONTROL, Keycode.KEYPAD_FOUR), (2, 149, 247))
+scene_intro = IntroScene(0)
+scene_zoom = ZoomScene(1)
 
 scenes = [None] * 4
-
 scenes[0] = scene_intro
-scenes[1] = scene_secondary
+scenes[1] = scene_zoom
 
 active_scene = None
 
