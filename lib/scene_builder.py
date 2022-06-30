@@ -41,6 +41,7 @@ def resolve_key(key_string):
   keys = {
     "LEFT_CONTROL": Keycode.LEFT_CONTROL,
     "ALT": Keycode.ALT,
+
     "KEYPAD_ZERO": Keycode.KEYPAD_ZERO,
     "KEYPAD_ONE": Keycode.KEYPAD_ONE,
     "KEYPAD_TWO": Keycode.KEYPAD_TWO,
@@ -50,7 +51,20 @@ def resolve_key(key_string):
     "KEYPAD_SIX": Keycode.KEYPAD_SIX,
     "KEYPAD_SEVEN": Keycode.KEYPAD_SEVEN,
     "KEYPAD_EIGHT": Keycode.KEYPAD_EIGHT,
-    "KEYPAD_NINE": Keycode.KEYPAD_NINE
+    "KEYPAD_NINE": Keycode.KEYPAD_NINE,
+
+    "F1": Keycode.F1,
+    "F2": Keycode.F2,
+    "F3": Keycode.F3,
+    "F4": Keycode.F4,
+    "F5": Keycode.F5,
+    "F6": Keycode.F6,
+    "F7": Keycode.F7,
+    "F8": Keycode.F8,
+    "F9": Keycode.F9,
+    "F10": Keycode.F10,
+    "F11": Keycode.F11,
+    "F12": Keycode.F12,
   }
 
   return keys[key_string]
