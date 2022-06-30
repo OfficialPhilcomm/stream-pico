@@ -3,40 +3,50 @@
     {
       "id": 0,
       "color": [247, 198, 2],
-      "keys": ["LEFT_CONTROL", "KEYPAD_THREE"],
+      "keys": ["LEFT_CONTROL", "F1"],
       "actions": [
         {
           "type": "button",
           "id": 0,
           "color": [240, 5, 228],
-          "keys": ["LEFT_CONTROL", "KEYPAD_FIVE"]
+          "keys": ["LEFT_CONTROL", "KEYPAD_ONE"]
         },
         {
           "type": "button",
           "id": 1,
           "color": [255, 234, 0],
-          "keys": ["LEFT_CONTROL", "KEYPAD_SIX"]
+          "keys": ["LEFT_CONTROL", "KEYPAD_TWO"]
         },
         {
           "type": "toggle",
           "id": 4,
           "color": [7, 247, 27],
-          "keys_on": ["LEFT_CONTROL", "KEYPAD_SEVEN"],
-          "keys_off": ["LEFT_CONTROL", "KEYPAD_EIGHT"],
+          "keys_on": ["LEFT_CONTROL", "KEYPAD_THREE"],
+          "keys_off": ["LEFT_CONTROL", "KEYPAD_FOUR"],
           "remember_state": true
         },
         {
           "type": "button",
           "id": 7,
           "color": [247, 119, 7],
-          "keys": ["LEFT_CONTROL", "KEYPAD_NINE"]
+          "keys": ["LEFT_CONTROL", "KEYPAD_FIVE"]
         }
       ]
     },
     {
       "id": 1,
       "color": [2, 149, 247],
-      "keys": ["LEFT_CONTROL", "KEYPAD_FOUR"]
+      "keys": ["LEFT_CONTROL", "F2"],
+      "actions": [
+        {
+          "type": "toggle",
+          "id": 0,
+          "color": [20, 247, 236],
+          "keys_on": ["LEFT_CONTROL", "KEYPAD_SIX"],
+          "keys_off": ["LEFT_CONTROL", "KEYPAD_SEVEN"],
+          "remember_state": true
+        }
+      ]
     }
   ]
 }
