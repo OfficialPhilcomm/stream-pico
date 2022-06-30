@@ -37,7 +37,7 @@ class RecordingBar:
       self.key_countdown_two.inactive()
       self.key_countdown_one.inactive()
 
-      shared.keyboard.send(Keycode.LEFT_CONTROL, Keycode.KEYPAD_ONE)
+      shared.keyboard.send(Keycode.LEFT_CONTROL, Keycode.F11)
     elif self.streaming and self.key_recording.is_pressed():
       self.key_start.color(color_red)
       self.key_start.inactive()
@@ -48,4 +48,4 @@ class RecordingBar:
 
       self.streaming = False
 
-      shared.keyboard.send(Keycode.LEFT_CONTROL, Keycode.KEYPAD_TWO)
+      shared.keyboard.send(Keycode.LEFT_CONTROL, Keycode.F12)
