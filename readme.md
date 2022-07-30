@@ -10,6 +10,7 @@ The StreamPICO is using a Raspberry Pi Pico and the Pimoroni RGB Keypad to creat
     - [Install StreamPICO code](#install-streampico-code)
   - [How it works](#how-it-works)
   - [Create config](#create-config)
+  - [Disable CIRCUITPY drive](#disable-circuitpy-drive)
 
 ## Installation
 
@@ -46,3 +47,7 @@ The bottom half of the keypad are the scene specific actions. So far, two action
 To make it as easy as possible to create a new config, I created a small webapp that allows you to drag and drop elements and import an existing config. It then gives you the json which can then be dropped as `setup.json` onto the Pico's root.
 
 The webapp can be found here: https://philcomm.dev/stream_pico
+
+## Disable CIRCUITPY drive
+To disable `CIRCUITPY` drive whenever the device is connected, go into the `boot.py` and uncomment `storage.disable_usb_drive()`.
+If you want to work on the device, first run `remount.py` through Thonny, then comment `storage.disable_usb_drive()`, and reconnect the device. Now you are able to change files.
