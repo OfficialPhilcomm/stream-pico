@@ -5,6 +5,7 @@ The StreamPICO is using a Raspberry Pi Pico and the Pimoroni RGB Keypad to creat
 - [StreamPICO](#streampico)
   - [Installation](#installation)
     - [Install Circuitpython](#install-circuitpython)
+    - [Install USB HID libraries](#install-usb-hid-libraries)
     - [Install Martin O'Hanlon's RGB Keypad Wrapper](#install-martin-ohanlons-rgb-keypad-wrapper)
     - [Install StreamPICO code](#install-streampico-code)
   - [How it works](#how-it-works)
@@ -14,6 +15,9 @@ The StreamPICO is using a Raspberry Pi Pico and the Pimoroni RGB Keypad to creat
 
 ### Install Circuitpython
 First you need to install CircuitPython. You can download it here: https://circuitpython.org/downloads. After downloading the `.uf2` file, you can install it like MicroPython.
+
+### Install USB HID libraries
+Go to https://circuitpython.org/libraries and download the library zip for your CircuitPython version. Inside that zip, you can find a `lib/` folder with an `adafruit_hid` folder inside. Copy that `adafruit_hid` folder into the `lib/` folder on the Pico.
 
 ### Install Martin O'Hanlon's RGB Keypad Wrapper
 Instructions for this can be found here: https://github.com/martinohanlon/pico-rgbkeypad.
