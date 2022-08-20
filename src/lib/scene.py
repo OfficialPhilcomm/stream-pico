@@ -2,6 +2,7 @@
 import time
 from keypadkey import KeypadKey
 import shared
+import asyncio
 
 class Scene:
   def __init__(self, id, color, keys):
@@ -38,7 +39,7 @@ class Scene:
   def is_pressed(self):
     return self.scene_button.is_pressed()
 
-  def check_for_action_press(self):
+  async def check_for_action_press(self):
     for i in range(8):
       if self.actions[i] and self.actions[i].is_pressed():
-        self.actions[i].trigger()
+        asyncio.create_task(self.actions[i].trigger())

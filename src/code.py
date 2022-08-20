@@ -1,4 +1,3 @@
-import time
 import usb_hid
 from rgbkeypad import RGBKeypad
 from adafruit_hid.keyboard import Keyboard
@@ -8,31 +7,35 @@ from recording_bar import RecordingBar
 from scene import Scene
 from button import Button
 import scene_builder
+import asyncio
 
-keypad = RGBKeypad()
-keyboard = Keyboard(usb_hid.devices)
-shared.set_keypad(keypad)
-shared.set_keyboard(keyboard)
+async def main():
+  keypad = RGBKeypad()
+  keyboard = Keyboard(usb_hid.devices)
+  shared.set_keypad(keypad)
+  shared.set_keyboard(keyboard)
 
-recording_bar = RecordingBar(0)
+  recording_bar = RecordingBar(0)
 
-scenes = [None] * 4
-scene_builder.build(scenes)
+  scenes = [None] * 4
+  scene_builder.build(scenes)
 
-active_scene = None
+  active_scene = None
 
-while True:
-  for i in range(4):
-    if scenes[i] and scenes[i].is_pressed() and scenes[i] != active_scene:
-      for scene in scenes:
-        if scene:
-          scene.inactive()
-      scenes[i].active()
-      active_scene = scenes[i]
+  while True:
+    for i in range(4):
+      if scenes[i] and scenes[i].is_pressed() and scenes[i] != active_scene:
+        for scene in scenes:
+          if scene:
+            scene.inactive()
+        scenes[i].active()
+        active_scene = scenes[i]
 
-  if active_scene:
-    active_scene.check_for_action_press()
+    if active_scene:
+      await active_scene.check_for_action_press()
 
-  recording_bar.check_for_pressed()
+    recording_bar.check_for_pressed()
 
-  time.sleep(0.1)
+    await asyncio.sleep(0.1)
+
+asyncio.run(main())
